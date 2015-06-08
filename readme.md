@@ -56,3 +56,6 @@ From the container terminal or SSH console, start quagga
 ```
 /etc/init.d/quagga
 
+Example of GNS3 configuration to connect quagga docker container:
+
+[![IMAGE ALT TEXT HERE](http://hpnouri.free.fr/git)](http://hpnouri.free.fr/git)
