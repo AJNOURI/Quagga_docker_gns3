@@ -22,7 +22,7 @@ ex:
 ##### Manage Quagga containers
 - Running new container
 - Start stopped containers
-- Delete existing container
+- Delete running/stopped container
 - Configure advanced networking (For connection with GNS3)
 
 ```
