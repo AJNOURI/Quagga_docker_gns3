@@ -2,15 +2,19 @@
 
 ###Manage quagga docker container for use with GNS3.
 ------
-
-
+##### Requirements:
+-  [Docker](https://docs.docker.com/installation/):
+-  Pipework
+```
+sudo bash -c "curl https://raw.githubusercontent.com/jpetazzo/pipework/master/pipework > /usr/local/bin/pipework"
+```
 
 
 
 ##### Build Quagga docker image
 
 From Dockerfile:
-(sudo docker build -t <tag> <Dockerfile_location>)
+(sudo docker build -t {tag} {Dockerfile_location})
 ex:
 ```
 sudo docker build -t quagga .
@@ -27,7 +31,7 @@ sudo docker build -t quagga .
 - Configure advanced networking (For connection with GNS3)
 
 ```
-./startquagga.sh <quagga_image_tag> <container_name>
+./startquagga.sh {quagga_image_tag} {container_name}
 ```
 
 
@@ -87,5 +91,7 @@ sudo ./qmonitor.sh
 ```
 then browse:
 127.0.0.1:8080
+
 and
+
 127.0.0.1:10086
