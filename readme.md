@@ -33,15 +33,6 @@ ex:
 
 
 
-##### Stop or remove all containers in Docker host:
-```
-sudo ./clean_docker.sh
-```
-
-
-
-
-
 ##### Show Quagga configuration files 
 (persistent after container deletion)
 ```
@@ -77,3 +68,12 @@ From the container terminal or SSH console, start quagga
 ##### Example of GNS3 configuration to connect quagga docker container:
 
 ![alt tag](http://hpnouri.free.fr/git/Selection_015.png)
+
+
+
+
+
+##### Stop or remove all containers in Docker host:
+```
+sudo ./clean_docker.sh
+```
