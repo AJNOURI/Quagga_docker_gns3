@@ -8,11 +8,12 @@
 
 
 ##### Build Quagga docker image
-```
+
 From Dockerfile:
 (sudo docker build -t <tag> <Dockerfile_location>)
 ex:
-```sudo docker build -t quagga .
+```
+sudo docker build -t quagga .
 ```
 
 
@@ -77,3 +78,14 @@ From the container terminal or SSH console, start quagga
 ```
 sudo ./clean_docker.sh
 ```
+
+
+
+##### GUI Monitoring & managing containers
+```
+sudo ./qmonitor.sh
+```
+then browse:
+127.0.0.1:8080
+and
+127.0.0.1:10086
