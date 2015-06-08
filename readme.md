@@ -1,6 +1,6 @@
 ## Quagga_docker_gns3
 
-Manage quagga docker container for use with GNS3.
+###Manage quagga docker container for use with GNS3.
 ------
 
 
@@ -16,6 +16,9 @@ ex:
 ```
 
 
+
+
+
 ##### Manage Quagga containers
 - Running new container
 - Start stopped containers
@@ -28,10 +31,14 @@ ex:
 
 
 
+
+
 ##### Stop or remove all containers in Docker host:
 ```
 sudo ./clean_docker.sh
 ```
+
+
 
 
 
@@ -43,6 +50,8 @@ sudo ./confdir.sh
 
 
 
+
+
 ##### SSH to quagga container
 To be able to SSH to your quagga container, put your public file “id_rsa.pub” in the current directory containing “Dockerfile”
 
@@ -51,11 +60,18 @@ From the container terminal, enable SSHD
 /usr/sbin/sshd
 ```
 
+
+
+
+
 ##### Start quagga process
 From the container terminal or SSH console, start quagga
 ```
 /etc/init.d/quagga
 ```
+
+
+
 
 
 ##### Example of GNS3 configuration to connect quagga docker container:
