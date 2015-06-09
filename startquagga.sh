@@ -5,6 +5,7 @@
 
 # $1 = Container name
 
+
 function networking(){
    # $1 : The 1st argument passed to the function, container ID.
    # Configure additional interfaces on the container:
@@ -30,7 +31,7 @@ function networking(){
     else
         echo "pipework error!" 1>&2
     fi
-       read -p 'Would you like to continue with network configuration? [Yy] [Nn]' CONT
+       read -p 'Would you like to continue with network configuration? [Yy] [Nn]  ' CONT
        case $CONT in
             [Yy]* ) ;;
             [Nn]* ) exit;;
@@ -44,7 +45,6 @@ then
     echo "Usage: `basename $0` {Quagga_image_tag} {Quagga_container_name}" ;exit 2
 fi
 
-
 INAME=$1
 CNAME=$2
 IID="$(sudo docker images | grep quagga | awk '{ print $3; }')"
@@ -54,12 +54,13 @@ CID="$(sudo docker ps -a | grep $CNAME | grep Exited | awk '{ print $1; }')"
 if [[ $RCID ]]
 then
     while true; do
-        echo "$CNAME is a running container: $RCID"
-        read -p 'A running container with the same name. Would you like to [E]xit it, [D]elete it or [S]kip? [Ee]/[Dd]/[Ss]' RESP
+        echo "There is a running container with the same name, $CNAME :CID= $RCID"
+        read -p 'Would you like to [E]xit it, [D]elete it, [A]ttach a console or [S]kip? [Ee]/[Dd]/[Aa]/[Ss]  ' RESP
         case "$RESP" in
         [Ee]* ) sudo docker stop $RCID;exit;;
         [Ss]* ) networking $CID; exit;;
         [Dd]* ) sudo docker stop $RCID; sudo docker rm $RCID; exit;;
+        [Aa]* ) lxterminal -e "sudo docker attach $RCID";exit;;
         * ) echo "Please answer yes [Yy]* or no [Nn]*";;
         esac
     done
@@ -69,7 +70,8 @@ if [[ $CID  ]]
 then
     echo "Container ID: $CID"
     while true; do
-        read -p 'A stopped container with the same name. Would you like to [R]un it or [D]elete it or [S]kip? [Rr]/[Dd]/[Ss]' RESP
+        echo "There is a stopped container with the same name, $CNAME :CID= $CID"
+        read -p 'Would you like to [R]un it or [D]elete it or [S]kip? [Rr]/[Dd]/[Ss]  ' RESP
         case $RESP in
         [Rr]* ) sudo docker start $CID;lxterminal -e "sudo docker attach $CNAME"; sleep 2;networking $CID; break;;
         [Dd]* ) sudo docker stop $CID; sudo docker rm $CID; exit;;
