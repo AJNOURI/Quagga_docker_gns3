@@ -3,8 +3,8 @@
 # AJ NOURI: cciethebeginning.wordpress.com
 # Email: ajn.bin@gmail.com
 
-# $1 = Container name
-
+# $1 = Image tag
+# $2 = Container name
 
 function networking(){
    # $1 : The 1st argument passed to the function, container ID.
@@ -12,7 +12,7 @@ function networking(){
    # - host bridge to  which the interfaces is connected
    # - container interface IP
    # - gateway: the last configured gateway is used
-   echo "Quagga networking... \n"
+   echo "Container networking... \n"
    while true; do
        read -p 'Continue? [Yy] [Nn]' NET
        case $NET in
@@ -42,12 +42,12 @@ function networking(){
 
 if [ "$#" -ne 2 ]
 then
-    echo "Usage: `basename $0` {Quagga_image_tag} {Quagga_container_name}" ;exit 2
+    echo "Usage: `basename $0` {image_tag} {container_name}" ;exit 2
 fi
 
 INAME=$1
 CNAME=$2
-IID="$(sudo docker images | grep quagga | awk '{ print $3; }')"
+IID="$(sudo docker images | grep $INAME | awk '{ print $3; }')"
 RCID="$(sudo docker ps -a | grep $CNAME | grep Up | awk '{ print $1; }')"
 CID="$(sudo docker ps -a | grep $CNAME | grep Exited | awk '{ print $1; }')"
 
@@ -80,7 +80,7 @@ then
         esac
     done
 else
-    echo "Spawning a new quagga container"
+    echo "Spawning a new container"
     lxterminal -e "sudo docker run -t -i --privileged=true --name $CNAME $IID /bin/bash"
     sleep 2
     CID="$(sudo docker ps | grep $CNAME | awk '{ print $1; }')"
