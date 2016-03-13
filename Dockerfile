@@ -25,12 +25,17 @@ RUN echo "deb-src http://fr.archive.ubuntu.com/ubuntu/ trusty-security main univ
 RUN echo "deb-src http://fr.archive.ubuntu.com/ubuntu/ trusty-updates main universe" >> /etc/apt/sources.list
 RUN apt-get update && apt-get install -y wget git
 
+
 # Enable SSH loging provided by Baseimage docker and regenerate keys
 RUN rm -f /etc/service/sshd/down
 RUN /etc/my_init.d/00_regen_ssh_host_keys.sh
 RUN mkdir -p /root/.ssh
-ADD id_rsa.pub /tmp/id_rsa.pub
-RUN cat /tmp/id_rsa.pub >> /root/.ssh/authorized_keys && rm -f /tmp/id_rsa.pub
+
+# Permanently enable the insecure-key
+RUN /usr/sbin/enable_insecure_key
+
+RUN echo 'root:gns3vpc' | chpasswd
+RUN sed -i "s/#PermitRootLogin without-password/PermitRootLogin yes/" /etc/ssh/sshd_config
 
 
 # Miscellaneous tools
