@@ -53,5 +53,5 @@ RUN touch /etc/quagga/babeld.conf && \
 	touch /etc/quagga/zebra.conf 
 
 RUN sed -i 's/no/yes/g' /etc/quagga/daemons 
-RUN chown -R quagga /etc/quagga
+
 #CMD ["/etc/init.d/quagga"]
